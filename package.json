@@ -25,6 +25,8 @@
     "onCommand:fzf-quick-open.runFzfAddWorkspaceFolderPwd",
     "onCommand:fzf-quick-open.runFzfInsertFile",
     "onCommand:fzf-quick-open.runFzfInsertFilePwd",
+    "onCommand:fzf-quick-open.runFzfInsertMarkdownLink",
+    "onCommand:fzf-quick-open.runFzfInsertMarkdownLinkPwd",
     "onCommand:fzf-quick-open.runFzfSearch",
     "onCommand:fzf-quick-open.runFzfSearchPwd",
     "onCommand:fzf-quick-open.runFzfSearchProjectRoot"
@@ -59,6 +61,14 @@
       {
         "command": "fzf-quick-open.runFzfInsertFilePwd",
         "title": "fzf: Insert file path from PWD using fzf"
+      },
+      {
+        "command": "fzf-quick-open.runFzfInsertMarkdownLink",
+        "title": "fzf: Insert file path as Markdown link using fzf"
+      },
+      {
+        "command": "fzf-quick-open.runFzfInsertMarkdownLinkPwd",
+        "title": "fzf: Insert file path as Markdown link from PWD using fzf"
       },
       {
         "command": "fzf-quick-open.runFzfSearch",
