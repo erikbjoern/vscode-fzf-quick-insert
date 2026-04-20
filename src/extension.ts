@@ -131,6 +131,10 @@ function getCodeOpenFolderCmd() {
 	return `${getFzfCmd()} | ${getFzfPipeScript()} add ${getFzfPipe()}`;
 }
 
+function getCodeInsertPathCmd() {
+	return `${getFzfCmd()} | ${getFzfPipeScript()} insert ${getFzfPipe()}`;
+}
+
 function getFindCmd() {
 	return findCmd;
 }
@@ -180,6 +184,15 @@ function processCommandInputImpl(data: string | Buffer) {
 			uri: vscode.Uri.file(folder)
 		});
 		vscode.commands.executeCommand('workbench.view.explorer');
+	} else if (cmd === 'insert') {
+		let filePath = path.isAbsolute(arg) ? arg : path.join(pwd, arg);
+		let editor = vscode.window.activeTextEditor;
+		if (!editor) { return; }
+		editor.edit((editBuilder) => {
+			editor!.selections.forEach(sel => {
+				editBuilder.replace(sel, filePath);
+			});
+		});
 	} else if (cmd === 'rg') {
 		let [file, linestr, colstr] = arg.split(':');
 		let filename = getPath(file, pwd);
@@ -296,6 +309,17 @@ export function activate(context: vscode.ExtensionContext) {
 		let term = showFzfTerminal(TERMINAL_NAME_PWD, fzfTerminalPwd);
 		moveToPwd(term);
 		term.sendText(`${getFindCmd()} | ${getCodeOpenFolderCmd()}`, true);
+	}));
+
+	context.subscriptions.push(vscode.commands.registerCommand('fzf-quick-open.runFzfInsertFile', () => {
+		let term = showFzfTerminal(TERMINAL_NAME, fzfTerminal);
+		term.sendText(getCodeInsertPathCmd(), true);
+	}));
+
+	context.subscriptions.push(vscode.commands.registerCommand('fzf-quick-open.runFzfInsertFilePwd', () => {
+		let term = showFzfTerminal(TERMINAL_NAME_PWD, fzfTerminalPwd);
+		moveToPwd(term);
+		term.sendText(getCodeInsertPathCmd(), true);
 	}));
 
 	context.subscriptions.push(vscode.commands.registerCommand('fzf-quick-open.runFzfSearch', async () => {

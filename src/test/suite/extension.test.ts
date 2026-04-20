@@ -20,6 +20,8 @@ async function verifyCommandsRegistered() {
 	expect(cmds.indexOf('fzf-quick-open.runFzfFilePwd')).not.eq(-1);
 	expect(cmds.indexOf('fzf-quick-open.runFzfAddWorkspaceFolder')).not.eq(-1);
 	expect(cmds.indexOf('fzf-quick-open.runFzfAddWorkspaceFolderPwd')).not.eq(-1);
+	expect(cmds.indexOf('fzf-quick-open.runFzfInsertFile')).not.eq(-1);
+	expect(cmds.indexOf('fzf-quick-open.runFzfInsertFilePwd')).not.eq(-1);
 	expect(cmds.indexOf('fzf-quick-open.runFzfSearch')).not.eq(-1);
 	expect(cmds.indexOf('fzf-quick-open.runFzfSearchPwd')).not.eq(-1);
 }
